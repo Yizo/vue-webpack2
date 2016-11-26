@@ -17,7 +17,8 @@ module.exports = {
   output: {
     path: config.build.assetsRoot,
     publicPath: process.env.NODE_ENV === 'production' ? config.build.assetsPublicPath : config.dev.assetsPublicPath,
-    filename: '[name].js'
+    filename: '[name].js',
+    chunkFilename:'[name].[chunkhash:8].js'
   },
   resolve: {
     extensions: ['', '.js', '.vue'],
@@ -81,17 +82,25 @@ module.exports = {
     ]
   },
   devServer: {
-    historyApiFallback: true,
-    contentBase: "./",
+    historyApiFallback: true,//查看历史url
+    contentBase: "./",//设置webpack-dev-server的根目录
     quiet: false, //控制台中不输出打包的信息
-    noInfo: false,
-    hot: true, //开启热点
+    noInfo: false,//不显示任何信息
+    hot: true, //开启热替换
     inline: true, //开启页面自动刷新
     lazy: false, //不启动懒加载
     progress: true, //显示打包的进度
+    compress:true,//开启gzip压缩
     watchOptions: {
       aggregateTimeout: 300
     },
+/*    //其实很简单的，只要配置这个参数就可以了
+    proxy: {
+      '/index.php': {
+        target: 'http://localhost:80/index.php',
+        secure: false
+      }
+    },*/
     port: '8088', //设置端口号
   },
   eslint: {

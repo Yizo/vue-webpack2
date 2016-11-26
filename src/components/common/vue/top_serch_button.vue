@@ -24,6 +24,7 @@
 </div>
 </template>
 <script>
+  import { mapGetters } from 'vuex'
   export default {
     props:['tsb_input1','tsb_input2','tsb_options','tsb_selectTitle','tsb_button1','tsb_button2','input2_show','select_show','button2_show'],
     data(){
@@ -36,9 +37,6 @@
     methods:{
       changes(value){
         alert(value);
-      },
-      openClose(){
-
       }
     }
   }

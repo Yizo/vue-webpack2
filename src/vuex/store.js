@@ -8,9 +8,17 @@ const state = {
   //数据
   uData:[],
   //索引
-  uIndex:''
+  uIndex:0
 }
 
+//getters
+const getters = {
+  uIndex:function(state){
+    return state.uIndex
+  }
+}
+
+//mutations
 const mutations = {
   //更新数据
   UP_DATA(state,data){
@@ -22,6 +30,17 @@ const mutations = {
   }
 }
 
+//actions
+//更新用户数据
+const actions = {
+  C_upData({ commit },data){
+      commit('UP_DATA',data)
+  },
+  C_index({ commit },index){
+      commit('UP_INDEX',index)
+  }
+}
+
 export default new Vuex.Store({
-  state,mutations
+  state,mutations,getters,actions
 })

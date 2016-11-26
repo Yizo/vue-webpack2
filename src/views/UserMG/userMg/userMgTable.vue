@@ -31,7 +31,7 @@
       label="操作"
       :type="index">
       <div>
-        <el-button type="text" size="small" @click="openDialog(row),upIndex()">编辑</el-button>
+        <el-button type="text" size="small" @click="openDialog(row),upIndex(row.name)">编辑</el-button>
         <el-button type="text" size="small">|</el-button>
         <el-button type="text" size="small" @click="deleteCl(row)">删除</el-button>
         <el-button type="text" size="small">|</el-button>
@@ -42,7 +42,7 @@
   <modal-dialog :show.sync="show" :class="dialogClass" v-on:closeDialogX="closeDialogx">
 
     <header class="dialog-header" slot="header">
-      <h1 class="dialog-title">张三详细资料</h1>
+      <h1 class="dialog-title">{{uIndex}}的详细资料</h1>
     </header>
 
     <div class="dialog-body" slot="body">
@@ -69,6 +69,7 @@
   import userImcc from './userIMCC.vue'
   import sadd from './ShippingAddress.vue'
   import bankAccount from './BankAccount.vue'
+  import { mapActions,mapGetters } from 'vuex'
   export default {
     components:{
       'modalDialog':modalDialog,
@@ -120,18 +121,14 @@
         const data = this.tableData[0].result;
         data.splice(data.indexOf(row),1);
       },
-      upIndex(row){
-        const index = this.tableData[0].result.indexOf(row)
-        let vm = this
-        let vindex = vm.myData
-        vm.getIndex(vindex);
-      }
+      ...mapActions({
+        upIndex:'C_index'
+      })
     },
-    vuex:{
-      actions:{
-        getIndex:function({ dispatch },index){
-          dispatch('UP_INDEX',index)
-        }
+    computed:{
+      ...mapGetters(['uIndex']),
+      row(row){
+        return this.tableData[0].result.indexOf(row);
       }
     },
     watch:{

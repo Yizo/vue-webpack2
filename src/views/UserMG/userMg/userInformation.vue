@@ -7,8 +7,8 @@
     </el-row>
     <div class="input_warp">
       <div class="warp">
-        <span>索引:{{index}}</span>
-        <input type="text" >
+        <span>姓名</span>
+        <input type="text" :value="uIndex">
       </div>
       <div class="warp">
         <span>用户名</span>
@@ -35,6 +35,7 @@
   </div>
 </template>
 <script>
+  import { mapGetters } from 'vuex'
   export default {
     data() {
       return {
@@ -45,12 +46,8 @@
         }
       };
     },
-    vuex:{
-      getters:{
-        index:function(state){
-          return state.uIndex
-        }
-      }
+    computed:{
+      ...mapGetters(['uIndex'])
     }
   }
 </script>
