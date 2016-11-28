@@ -6,15 +6,18 @@ Vue.use(Vuex)
 //state
 const state = {
   //数据
-  uData:[],
-  //索引
-  uIndex:0
+  "uData":[],
+  //当前行数据
+  "thisData":[]
 }
 
 //getters
 const getters = {
-  uIndex:function(state){
-    return state.uIndex
+  uData:function(state){
+    return state.uData
+  },
+  thisData:function(state){
+    return state.thisData
   }
 }
 
@@ -24,9 +27,10 @@ const mutations = {
   UP_DATA(state,data){
     state.uData = { ...state.uData,data }
   },
-  //更新索引
-  UP_INDEX(state,index){
-    state.uIndex = index;
+  //更新当前行数据
+  UP_INDEX(state,data){
+    state.thisData.splice(0,state.thisData.length)
+    state.thisData.push(data)
   }
 }
 
@@ -36,8 +40,8 @@ const actions = {
   C_upData({ commit },data){
       commit('UP_DATA',data)
   },
-  C_index({ commit },index){
-      commit('UP_INDEX',index)
+  C_index({ commit },data){
+      commit('UP_INDEX',data)
   }
 }
 

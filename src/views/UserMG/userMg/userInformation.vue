@@ -8,23 +8,23 @@
     <div class="input_warp">
       <div class="warp">
         <span>姓名</span>
-        <input type="text" :value="uIndex">
+        <input type="text" :value="thisData[0].rid">
       </div>
       <div class="warp">
         <span>用户名</span>
-        <input type="text">
+        <input type="text" :value="thisData[0].name">
       </div>
       <div class="warp">
         <span>用户类型</span>
-        <input type="text">
+        <input type="text" :value="thisData[0].wk">
       </div>
       <div class="warp">
         <span>公司名称</span>
-        <input type="text">
+        <input type="text" :value="thisData[0].wboxoffice">
       </div>
       <div class="warp">
         <span>手机号码</span>
-        <input type="text">
+        <input type="text" :value="thisData[0].tboxoffice">
       </div>
     </div>
     <el-row class="button">
@@ -47,7 +47,7 @@
       };
     },
     computed:{
-      ...mapGetters(['uIndex'])
+      ...mapGetters(['thisData'])
     }
   }
 </script>
@@ -84,6 +84,7 @@
     padding: 5px 0;
     border: 1px solid #e9e9e9;
     border-radius: 3px;
+    text-indent: 5px;
   }
   img{
     display: block;

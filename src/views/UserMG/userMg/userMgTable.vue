@@ -31,7 +31,7 @@
       label="操作"
       :type="index">
       <div>
-        <el-button type="text" size="small" @click="openDialog(row),upIndex(row.name)">编辑</el-button>
+        <el-button type="text" size="small" @click="openDialog(row),upIndex(row)">编辑</el-button>
         <el-button type="text" size="small">|</el-button>
         <el-button type="text" size="small" @click="deleteCl(row)">删除</el-button>
         <el-button type="text" size="small">|</el-button>
@@ -42,7 +42,7 @@
   <modal-dialog :show.sync="show" :class="dialogClass" v-on:closeDialogX="closeDialogx">
 
     <header class="dialog-header" slot="header">
-      <h1 class="dialog-title">{{uIndex}}的详细资料</h1>
+      <h1 class="dialog-title">{{name}}的详细资料</h1>
     </header>
 
     <div class="dialog-body" slot="body">
@@ -90,12 +90,13 @@
         currentView:'userInfo',
         //表格属性
         tableData:[],
-        myData:'mydata'
+        name:''
       }
     },
     methods: {
       openDialog(row){
         this.show = true;
+        this.name = row.name
       },
       closeDialog(){
         this.show = false
@@ -123,13 +124,7 @@
       },
       ...mapActions({
         upIndex:'C_index'
-      })
-    },
-    computed:{
-      ...mapGetters(['uIndex']),
-      row(row){
-        return this.tableData[0].result.indexOf(row);
-      }
+      }),
     },
     watch:{
       '$route':'getUserInfo'
